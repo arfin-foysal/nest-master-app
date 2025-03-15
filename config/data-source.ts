@@ -13,7 +13,7 @@ export const dataSourceOptions: DataSourceOptions = {
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     entities: ["dist/**/*.entity{.ts,.js}"],
-    migrations: ["dist/db/migrations/*{.ts,.js}"]
+    migrations: ["dist/src/database/migrations/*{.ts,.js}"]
 }
 
 const dataSource = new DataSource(dataSourceOptions)

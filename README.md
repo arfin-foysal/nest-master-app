@@ -71,7 +71,10 @@ cp .env.example .env
 ## 🗄️ Database Setup (TypeORM Example)
 ### Run Migrations
 ```sh
-npm run typeorm migration:run
+npm run migration:run                                                      
+npm run migration:revert
+npm run migration:create --name=your_migration_name
+npm run migration:generate --name=your_migration_name
 ```
 
 ### Seed Database
