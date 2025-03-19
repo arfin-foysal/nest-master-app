@@ -13,7 +13,7 @@ export class User {
   password: string;
 
   @Column()
-  firstName: string;
+  name: string;
 
   @Column()
   lastName: string;

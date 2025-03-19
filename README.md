@@ -73,6 +73,8 @@ cp .env.example .env
 ```sh
 npm run migration:run                                                      
 npm run migration:revert
+npm run migration:fresh
+npm run migration:refresh
 npm run migration:create --name=your_migration_name
 npm run migration:generate --name=your_migration_name
 ```

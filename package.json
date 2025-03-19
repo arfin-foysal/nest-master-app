@@ -23,14 +23,18 @@
     "migration:generate": "npm run typeorm -- -d dist/config/data-source.js migration:generate ./src/database/migrations/$npm_config_name",
     "migration:create": "npm run typeorm -- migration:create ./src/database/migrations/your_migration_name",
     "migration:run": "npm run typeorm migration:run -- -d dist/config/data-source.js",
-    "migration:revert": "npm run typeorm -- migration:revert -- -d dist/config/data-source.js"
-    
+    "migration:revert": "npm run typeorm migration:revert -- -d dist/config/data-source.js",
+    "migration:fresh": "npm run typeorm schema:drop -- -d dist/config/data-source.js && npm run migration:run",
+    "migration:refresh": "npm run migration:fresh && npm run seed:run"
+
+
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
     "@nestjs/config": "^4.0.1",
     "@nestjs/core": "^11.0.1",
     "@nestjs/jwt": "^11.0.0",
+    "@nestjs/mapped-types": "*",
     "@nestjs/passport": "^11.0.5",
     "@nestjs/platform-express": "^11.0.1",
     "@nestjs/typeorm": "^11.0.0",
