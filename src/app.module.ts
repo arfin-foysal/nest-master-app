@@ -7,10 +7,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './modules/auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtGuard } from './modules/auth/guards/jwt.guard';
-import { UsersController } from './modules/users/users.controller';
-// import typeorm from './config/typeorm';
 import { dataSourceOptions } from 'config/data-source';
-import { PostsModule } from './modules/posts/posts.module';
+import { PostModule } from './modules/post/post.module';
+import { CommentModule } from './modules/comment/comment.module';
+import { UsersController } from './modules/users/users.controller';
 
 @Module({
   imports: [
@@ -20,7 +20,8 @@ import { PostsModule } from './modules/posts/posts.module';
     TypeOrmModule.forRoot(dataSourceOptions),
     UsersModule,
     AuthModule,
-    PostsModule,
+    PostModule,
+    CommentModule,
   ],
   controllers: [AppController, UsersController],
   providers: [
