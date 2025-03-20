@@ -18,16 +18,13 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-
     "typeorm": "ts-node ./node_modules/typeorm/cli",
     "migration:generate": "npm run typeorm -- -d dist/config/data-source.js migration:generate ./src/database/migrations/$npm_config_name",
-    "migration:create": "npm run typeorm -- migration:create ./src/database/migrations/your_migration_name",
+    "migration:create": "npm run typeorm -- migration:create ./src/database/migrations/$npm_config_name",
     "migration:run": "npm run typeorm migration:run -- -d dist/config/data-source.js",
     "migration:revert": "npm run typeorm migration:revert -- -d dist/config/data-source.js",
     "migration:fresh": "npm run typeorm schema:drop -- -d dist/config/data-source.js && npm run migration:run",
     "migration:refresh": "npm run migration:fresh && npm run seed:run"
-
-
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
@@ -39,6 +36,8 @@
     "@nestjs/platform-express": "^11.0.1",
     "@nestjs/typeorm": "^11.0.0",
     "bcrypt": "^5.1.1",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
     "mysql2": "^3.13.0",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",

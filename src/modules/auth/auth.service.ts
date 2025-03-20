@@ -56,6 +56,7 @@ export class AuthService {
       const newUser = await this.usersService.create({
         ...userDto,
         password: hashedPassword,
+        phone: userDto.phone || '',
       });
 
       return this.login(newUser);

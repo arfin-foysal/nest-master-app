@@ -16,14 +16,11 @@ export class User {
   name: string;
 
   @Column()
-  lastName: string;
+  phone: string;
+  
 
   @Column({ nullable: true })
   avatar?: string;
 
-  @Column({ nullable: true })
-  bio?: string;
 
-  @Column({ nullable: true })
-  location?: string;
 }
