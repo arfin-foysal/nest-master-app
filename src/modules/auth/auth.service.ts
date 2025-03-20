@@ -5,7 +5,6 @@ import { UsersService } from 'src/modules/users/users.service';
 import { RegisterRequestDto } from './dtos/register-request.dto';
 import { User } from 'src/modules/users/entities/users.entity';
 import { Response } from 'src/common/utils/response';
-
 @Injectable()
 export class AuthService {
   constructor(
@@ -36,7 +35,9 @@ export class AuthService {
   async login(user: User) {
     try {
       const payload = { email: user.email, id: user.id };
-      const token = { access_token: this.jwtService.sign(payload) };
+      const token = { access_token: this.jwtService.sign(payload,{
+        expiresIn: process.env.JWT_EXPIRES_IN || '1d',
+      }) };
       const { password, ...userWithoutPassword } = user;
 
       return Response.success({ user: userWithoutPassword, token }, 'Login successful');
@@ -57,6 +58,9 @@ export class AuthService {
         ...userDto,
         password: hashedPassword,
         phone: userDto.phone || '',
+        posts: [],
+        createdAt: new Date(),
+        updatedAt: new Date(),
       });
 
       return this.login(newUser);

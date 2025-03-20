@@ -13,9 +13,14 @@ export class PostService {
     private postRepository: Repository<Post>,
   ) {}
 
-  async create(createPostDto: CreatePostDto) {
+  async create(createPostDto: CreatePostDto, userId) {
     try {
-      const post = this.postRepository.create(createPostDto);
+      // Create the post and assign only the userId to createdBy
+      const post = this.postRepository.create({
+        ...createPostDto,
+        createdBy: userId,  // Assign the userId directly to createdBy
+      });
+  
       const savedPost = await this.postRepository.save(post);
       return Response.success(savedPost, 'Post created successfully');
     } catch (error) {
@@ -25,12 +30,29 @@ export class PostService {
 
   async findAll() {
     try {
-      const posts = await this.postRepository.find();
+      const posts = await this.postRepository.find({
+        relations: ['comments', 'createdBy'],  // Include the comments and createdBy relations
+        select: {
+          id: true,  // Select post fields
+          title: true,
+          content: true,
+          createdBy: {
+            id: true,   // Select only id and name for createdBy
+            name: true,
+          },
+          comments: {
+            id: true,
+            content: true,
+          },
+        },
+      });
+  
       return Response.success(posts, 'Posts retrieved successfully');
     } catch (error) {
       return Response.error(error, 'Failed to retrieve posts');
     }
   }
+  
 
   async findOne(id: number) {
     try {

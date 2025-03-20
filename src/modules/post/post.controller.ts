@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Put, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put, Delete ,Request} from '@nestjs/common';
 import { PostService } from './post.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { Public } from '../auth/decorators/public.decorator';
@@ -9,8 +9,9 @@ export class PostController {
   constructor(private readonly postService: PostService) {}
 
   @Post()
-  async create(@Body() createPostDto: CreatePostDto) {
-    return await this.postService.create(createPostDto);
+  async create(@Body() createPostDto: CreatePostDto, @Request() req) {
+    const userId = req.user.id;
+    return await this.postService.create(createPostDto, userId);
   }
 
   @Get()

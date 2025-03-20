@@ -1,5 +1,5 @@
 import { Post } from 'src/modules/post/entities/post.entity';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
 
 @Entity({ name: 'comments' })
 export class Comment {
@@ -9,10 +9,8 @@ export class Comment {
   @Column()
   content: string;
 
-  @ManyToOne(() => Post, (post) => post.comments)  // Fix relation here
+
+  @ManyToOne(() => Post, (post) => post.comments)
   @JoinColumn({ name: 'postId' })
   post: Post;
-
-  @Column({ default: new Date() })
-  createdAt: Date;
 }

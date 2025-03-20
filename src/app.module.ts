@@ -9,9 +9,10 @@ import { APP_GUARD } from '@nestjs/core';
 import { JwtGuard } from './modules/auth/guards/jwt.guard';
 import { dataSourceOptions } from 'config/data-source';
 import { PostModule } from './modules/post/post.module';
-import { CommentModule } from './modules/comment/comment.module';
 import { UsersController } from './modules/users/users.controller';
-
+import { CommentModule } from './modules/comment/comment.module';
+import { config as dotenvConfig } from "dotenv";
+dotenvConfig({ path: '.env' });
 @Module({
   imports: [
     ConfigModule.forRoot({
